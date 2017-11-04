@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package max.subarray.v1;
+package max.subarray.v2;
 
-import static java.lang.Integer.MIN_VALUE;
+import static java.lang.Byte.MIN_VALUE;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,13 +13,12 @@ import java.util.Scanner;
  *
  * @author claudia
  */
-public class MaxSubarrayV1 {
+public class MaxSubarrayV2 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
         Scanner keyboard = new Scanner(System.in);
         System.out.println("Digite o tamanho do vetor");
         int n = keyboard.nextInt();
@@ -38,31 +37,27 @@ public class MaxSubarrayV1 {
        int inicio = 0;
        int fim = 0;
         
-        //subvetor máximo:
-        for(int i=0; i< n; i++)
-        {
-           for( int j = i; j < n; j++)
+       for(int i=0; i<n; i++)
+       {
+           soma = 0;
+           for(int j=i; j<n; j++)
            {
-               soma = 0;
-               for(int k = i; k <= j; k++)
-               {
-                   soma += array[k];
-               }
+               soma += array[j];
                if(soma > maxSoma)
                {
                    maxSoma = soma;
                    inicio = i;
                    fim = j;
                }
-           } 
-        }
-        
-        //mostrando resultados
+           }
+       }
+       
         for(int i=0; i<n; i++){
             System.out.print(array[i]+"  ");
         }
         
         System.out.print("\nSoma máxima: " + maxSoma + "\nInicio: " + inicio + "\nFim: " + fim);
+       
     }
     
 }
