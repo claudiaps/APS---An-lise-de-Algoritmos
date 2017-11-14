@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "myBib.h"
 
 int main( int argc, char *argv[ ] ){
 	if (argc != 2){
@@ -18,7 +19,7 @@ int main( int argc, char *argv[ ] ){
 	// iniciar vetor com numeros pseudoaleatorios
 	for (int i = 0; i < n; i++)
 	{
-		vet[i] = rand()%200 - 100;
+		vet[i] = myRand()%200 - 100;
 	}
 	
 	int soma, maxSoma = INT_MIN, inicio, fim;

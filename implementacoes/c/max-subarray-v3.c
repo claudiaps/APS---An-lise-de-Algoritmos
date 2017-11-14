@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "myBib.h"
 
 // struct para poder retornar mais de um valor na função
 typedef struct Subvetor
@@ -32,7 +33,7 @@ int main( int argc, char *argv[ ] ){
 	// iniciar vetor com numeros pseudoaleatorios
 	for (int i = 0; i < n; i++)
 	{
-		vet[i] = rand()%200 - 100;
+		vet[i] = myRand()%200 - 100;
 	}
 
 	// encontrar o subvetor maximo

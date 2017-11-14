@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include "myBib.h"
 
 int main( int argc, char *argv[ ] ){
 	if (argc != 2){
@@ -14,11 +15,10 @@ int main( int argc, char *argv[ ] ){
 
 	int soma_inicio = 0, inicio = 0, fim = 0, soma, maxSoma, vet[n];
 	srand (1); // seed para gerar numeros iguais
-
 	// iniciar vetor com numeros pseudoaleatorios
 	for (int i = 0; i < n; i++)
 	{
-		vet[i] = rand()%200 - 100;
+		vet[i] = myRand()%200 - 100;
 	}
 
 	// inicia as somas
