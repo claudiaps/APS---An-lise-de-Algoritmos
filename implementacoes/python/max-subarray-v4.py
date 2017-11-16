@@ -41,11 +41,11 @@ for i in range(0,n):
         inicio = soma_inicio
         fim = i
 
-# Imprime o Vetor Inicial
-print '\n',vet
+
 
 # Imprime a soma do subvetor, a posição do inicio e do fim
-print max,inicio,fim
+
+print'Soma maxima:',max,'\n','inicio: ', inicio,'\n','fim: ', fim
 
 
 
