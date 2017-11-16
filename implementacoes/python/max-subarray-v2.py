@@ -3,7 +3,7 @@
 # Algoritmo do Subvetor Máximo - Versão Iterativa Melhorada
 # Autor: João Victor Nascimento
 import sys
-import random
+import myBib
 
 argc = len(sys.argv)
 
@@ -16,12 +16,9 @@ n = int(sys.argv[1])
 
 vet = []
 
-# Seed que gera números iguais
-random.seed(1)
-
 # Preenchendo uma lista com números pseudoaleatórios
 for i in range(0,n):
-    vet.insert(i,random.randrange(-100,100,1)) 
+    vet.insert(i, (myBib.myRand() % 200) - 100)
 
 max = -2147483647
 
