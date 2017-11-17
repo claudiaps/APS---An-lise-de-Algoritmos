@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# Algoritmo do Subvetor Máximo - Versão Iterativa Melhorada
+# Autor: João Victor Nascimento
+import sys
+import random
+
+
+
+def max_cross(vet, inicio, meio, fim):
+    e_soma = -2147483647
+    d_soma = -2147483647
+    soma = 0
+    for i in range(meio,inicio-1,-1):
+        soma += vet[i]
+        if e_soma < soma :
+            e_soma = soma
+            e_max = i
+    
+    soma = 0
+    for i in range(meio+1,fim+1):
+        soma = soma + vet[i]
+        if soma > d_soma:
+            d_soma = soma
+            d_max = i
+    
+    return e_max, d_max, (e_soma + d_soma)
+
+def subvetor_maximo(vet, inicio, fim):
+    if inicio == fim:
+        return inicio, fim, vet[inicio]
+
+    meio = (inicio + fim)/2
+    #print 'inicio:',inicio, 'fim:',fim, 'meio:',meio
+
+    e_inicio, e_fim, e_soma = subvetor_maximo(vet, inicio, meio)
+    d_inicio, d_fim, d_soma = subvetor_maximo(vet, meio+1, fim)
+    m_inicio, m_fim, m_soma = max_cross(vet, inicio, meio, fim)
+
+    if e_soma >= d_soma and e_soma >= m_soma :
+        return e_inicio, e_fim, e_soma
+    elif d_soma >= e_soma and d_soma >= m_soma :
+        return d_inicio, d_fim, d_soma
+    else:
+        return m_inicio, m_fim, m_soma
+
+
+def main():
+    argc = len(sys.argv)
+
+    if argc != 2:
+        print 'Uso: ./algoritmo tam_vet\n'
+        sys.exit(0)
+
+    # Tamanho do Vetor
+    n = int(sys.argv[1]) 
+
+    vet = []
+
+    # Seed que gera números iguais
+    random.seed(1)
+
+    # Preenchendo uma lista com números pseudoaleatórios
+    for i in range(0,n):
+        vet.insert(i,random.randrange(-100,100,1)) 
+
+    inicio, fim, soma = subvetor_maximo(vet, 0, n-1)
+
+   # Imprime o Vetor Inicial
+    print '\n',vet
+
+    # Imprime a soma do subvetor, a posição do inicio e do fim
+    print'Soma maxima:',soma,'\n','inicio: ', inicio,'\n','fim: ', fim
+
+
+main()
