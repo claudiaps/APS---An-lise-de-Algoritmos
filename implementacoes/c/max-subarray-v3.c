@@ -28,7 +28,6 @@ int main( int argc, char *argv[ ] ){
 	int n = atoi(argv[1]); // tamanho do vetor
 
 	int vet[n];
-	srand (1); // seed para gerar numeros iguais
 
 	// iniciar vetor com numeros pseudoaleatorios
 	for (int i = 0; i < n; i++)
