@@ -17,7 +17,7 @@ type
   pInt = ^integer; {Cria ponteiro p/ inteiro}
 
 {Verifica se o subvetor maximo esta no meio do vetor}
-function max_cross(vet : array of LongInt; inicio, meio, fim : integer) : sub_max;
+function max_cross(vet : array of Longint; inicio, meio, fim : integer) : sub_max;
 var
   e_soma, d_soma, soma, e_max, d_max, i : integer;
   maxSubVetor : sub_max;
@@ -55,7 +55,7 @@ begin
       max_cross := maxSubVetor; {Retorna o subvetor}
 end;
 
-function subvetor_maximo(vet : array of LongInt; inicio: integer; fim: integer) : sub_max;
+function subvetor_maximo(vet : array of Longint; inicio: integer; fim: integer) : sub_max;
 var
   maxSubVetor, e_maxSubVetor, m_maxSubVetor, d_maxSubVetor : sub_max;
   m : real;
