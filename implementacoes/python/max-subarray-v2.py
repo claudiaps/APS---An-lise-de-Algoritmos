@@ -33,6 +33,8 @@ for i in range(0,n): # Inicio
             fim = j
 
 # Imprime o Vetor Inicial
+
+vet = map(int,vet)
 print '\n',vet
 
 # Imprime a soma do subvetor, a posição do inicio e do fim
