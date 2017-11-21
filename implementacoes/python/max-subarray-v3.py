@@ -3,7 +3,7 @@
 # Algoritmo do Subvetor Máximo - Versão Iterativa Melhorada
 # Autor: João Victor Nascimento
 import sys
-import random
+import myBib
 
 
 
@@ -57,16 +57,16 @@ def main():
 
     vet = []
 
-    # Seed que gera números iguais
-    random.seed(1)
+
 
     # Preenchendo uma lista com números pseudoaleatórios
     for i in range(0,n):
-        vet.insert(i,random.randrange(-100,100,1)) 
+         vet.insert(i, (myBib.myRand() % 200) - 100)
 
     inicio, fim, soma = subvetor_maximo(vet, 0, n-1)
 
    # Imprime o Vetor Inicial
+    vet = map(int,vet)
     print '\n',vet
 
     # Imprime a soma do subvetor, a posição do inicio e do fim
