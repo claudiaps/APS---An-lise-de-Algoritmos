@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include<time.h> 
 #include "myBib.h"
 
 int main( int argc, char *argv[ ] ){
@@ -38,6 +39,7 @@ int main( int argc, char *argv[ ] ){
 	soma = vet[0];
 	maxSoma = vet[0];
 
+	clock_t t1=clock();
 	// encontrar o subvetor maximo
 	for(int i = 1; i < n; i++){ // inicia em 1 pois as somas já iniciam com a posição 0
 		soma += vet[i];
@@ -51,12 +53,14 @@ int main( int argc, char *argv[ ] ){
 			fim = i; // o fim é a ultima posição.. no caso.. a posição atual
 		}
 	}
+	clock_t t2=clock();
 
 	// imprimir resultados
 	for (int i = 0; i < n; i++){
 		printf("vet[%d]: %d\n", i, vet[i]);
 	}
-	printf("Soma maxima: %d \ninicio: %d \nfim: %d", maxSoma, inicio, fim);
+	printf("Soma maxima: %d \ninicio: %d \nfim: %d\n", maxSoma, inicio, fim);
+	printf("The time taken is.. %g ", (t2-t1));
 
 	return 0;	
 }
