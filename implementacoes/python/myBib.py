@@ -1,3 +1,5 @@
+import sys
+
 nSeed = 2048
 
 def myRand():
@@ -9,7 +11,14 @@ def unsigned(n):
 	return n & 0xFFFFFFFF
 
 def main():
-	for i in range(10):
+	argc = len(sys.argv)
+	if argc != 2:
+		return
+
+    # Tamanho do Vetor
+	n = int(sys.argv[1])
+
+	for i in range(n):
 		print((myRand() % 200) - 100)
 
 if __name__ == "__main__":

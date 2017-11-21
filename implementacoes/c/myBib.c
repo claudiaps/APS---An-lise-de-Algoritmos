@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include "myBib.h"
 
-unsigned int myRand()
+int myRand()
 {
     // seed é 2048
-    static unsigned int nSeed = 2048;
+    static int nSeed = 2048;
 
     // Usa a seed para gerar um novo valor,
     // É uma constante muito grande e com overflow, deixando bem dificil de prever o proximo numero

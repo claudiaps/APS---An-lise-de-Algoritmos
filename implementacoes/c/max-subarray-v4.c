@@ -7,18 +7,32 @@
 #include "myBib.h"
 
 int main( int argc, char *argv[ ] ){
-	if (argc != 2){
-		printf("Uso: ./algoritmo tam_vet\n");
+	if (argc != 3)
+	{
+		printf("Uso: ./algoritmo tam_vet file\n");
 		return 0;
 	}
-	int n = atoi(argv[1]); // tamanho do vetor
 
-	int soma_inicio = 0, inicio = 0, fim = 0, soma, maxSoma, vet[n];
-	// iniciar vetor com numeros pseudoaleatorios
-	for (int i = 0; i < n; i++)
+	FILE *fp;
+	char *line = NULL;
+	size_t len = 0;
+	ssize_t read;
+	int i = 0;
+
+	int n = atoi(argv[1]); // tamanho do vetor
+	fp = fopen(argv[2], "r");
+	if (fp == NULL)
+		exit(EXIT_FAILURE);
+
+	int vet[n];
+
+	while ((read = getline(&line, &len, fp)) != -1)
 	{
-		vet[i] = myRand()%200 - 100;
+		vet[i] = atoi(line);
+		i++;
 	}
+	
+	int soma_inicio = 0, inicio = 0, fim = 0, soma, maxSoma;
 
 	// inicia as somas
 	soma = vet[0];
