@@ -4,8 +4,7 @@
 # Autor: João Victor Nascimento
 import sys
 import myBib
-
-
+import os.path
 
 def max_cross(vet, inicio, meio, fim):
     e_soma = -2147483647
@@ -52,10 +51,13 @@ def main():
         print 'Uso: ./algoritmo tam_vet\n'
         sys.exit(0)
 
-    # Tamanho do Vetor
-    n = int(sys.argv[1]) 
+    teste = sys.argv[1]
 
-    vet = []
+    vet = open(teste).readlines()
+
+    n = len(vet)
+
+    vet = map(int,vet)
 
 
 

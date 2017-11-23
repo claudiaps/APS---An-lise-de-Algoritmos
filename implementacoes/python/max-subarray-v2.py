@@ -4,6 +4,7 @@
 # Autor: João Victor Nascimento
 import sys
 import myBib
+import os.path
 
 argc = len(sys.argv)
 
@@ -11,10 +12,13 @@ if argc != 2:
     print 'Uso: ./algoritmo tam_vet\n'
     sys.exit(0)
 
-# Tamanho do Vetor
-n = int(sys.argv[1]) 
+teste = sys.argv[1]
 
-vet = []
+vet = open(teste).readlines()
+
+n = len(vet)
+
+vet = map(int,vet)
 
 # Preenchendo uma lista com números pseudoaleatórios
 for i in range(0,n):
