@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <time.h> 
+#include <sys/time.h> 
 #include "myBib.h"
 
 int main( int argc, char *argv[ ] ){
@@ -34,6 +36,12 @@ int main( int argc, char *argv[ ] ){
 	
 	int soma, maxSoma = INT_MIN, inicio, fim;
 
+	struct timeval time1, time2;
+    double elapsedTime;
+
+	clock_t t1=clock();
+	gettimeofday(&time1, NULL);
+
 	// encontrar o subvetor maximo
 	for (int i = 0; i < n; i++) // valor inicial
 	{
@@ -49,11 +57,19 @@ int main( int argc, char *argv[ ] ){
 		}
 	}
 
+	clock_t t2=clock();
+	gettimeofday(&time2, NULL);
+	elapsedTime = (time2.tv_sec - time1.tv_sec) * 1000.0;      // sec to ms
+    elapsedTime += (time2.tv_usec - time1.tv_usec) / 1000.0;   // us to ms
+
+
 	// imprimir resultados
 	for (int i = 0; i < n; i++){
 		printf("vet[%d]: %d\n", i, vet[i]);
 	}
-	printf("Soma maxima: %d \ninicio: %d \nfim: %d", maxSoma, inicio, fim);
+	printf("Soma maxima: %d \ninicio: %d \nfim: %d\n", maxSoma, inicio, fim);
+	printf("Tempo de CPU: %lf ms\n", ((double)(1000.0 * (t2-t1) / CLOCKS_PER_SEC)));
+	printf("Tempo real: %lf ms\n", elapsedTime);
 
 	return 0;	
 }
