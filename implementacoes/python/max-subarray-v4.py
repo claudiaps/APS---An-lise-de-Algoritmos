@@ -5,6 +5,8 @@
 import sys
 import myBib
 import os.path
+import timeit
+import time
 
 argc = len(sys.argv)
 
@@ -18,11 +20,10 @@ vet = open(teste).readlines()
 
 n = len(vet)
 
-vet = map(int,vet)
+# Imprime o Vetor Inicial
 
-# Preenchendo uma lista com números pseudoaleatórios
-for i in range(0,n):
-    vet.insert(i, (myBib.myRand() % 200) - 100)
+vet = map(int,vet)
+print '\n',vet
 
 soma_inicio = 0
 inicio = 0
@@ -30,6 +31,9 @@ fim = 0
 
 soma = vet[0]
 max = vet[0]
+
+inicio1 = timeit.default_timer()
+time = time.clock()
 
 # Encontrando o subvetor máximo
 for i in range(0,n):
@@ -42,11 +46,13 @@ for i in range(0,n):
         inicio = soma_inicio
         fim = i
 
+print '\n','Tempo de CPU:', time
 
-# Imprime o Vetor Inicial
+fim1 = timeit.default_timer()
 
-vet = map(int,vet)
-print '\n',vet
+tempo = fim1-inicio1
+
+print 'Tempo Real:', tempo
 
 # Imprime a soma do subvetor, a posição do inicio e do fim
 

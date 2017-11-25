@@ -5,6 +5,8 @@
 import sys
 import myBib
 import os.path
+import timeit
+import time
 
 def max_cross(vet, inicio, meio, fim):
     e_soma = -2147483647
@@ -57,20 +59,26 @@ def main():
 
     n = len(vet)
 
-    vet = map(int,vet)
-
-
-
-    # Preenchendo uma lista com números pseudoaleatórios
-    for i in range(0,n):
-         vet.insert(i, (myBib.myRand() % 200) - 100)
-
-    inicio, fim, soma = subvetor_maximo(vet, 0, n-1)
-
    # Imprime o Vetor Inicial
     vet = map(int,vet)
     print '\n',vet
 
+    inicio1 = timeit.default_timer()
+    
+    global time
+
+    time = time.clock()
+
+    inicio, fim, soma = subvetor_maximo(vet, 0, n-1)
+
+    print '\n','Tempo de CPU:', time
+
+    fim1 = timeit.default_timer()
+
+    tempo = fim1-inicio1
+
+    print 'Tempo Real:', tempo
+   
     # Imprime a soma do subvetor, a posição do inicio e do fim
     print'Soma maxima:',soma,'\n','inicio: ', inicio,'\n','fim: ', fim
 
