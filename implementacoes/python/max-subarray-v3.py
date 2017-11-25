@@ -62,22 +62,26 @@ def main():
    # Imprime o Vetor Inicial
     vet = map(int,vet)
     print '\n',vet
-
-    inicio1 = timeit.default_timer()
     
-    global time
+    global inicio_cpu
 
-    time = time.clock()
+    inicio_cpu = time.clock()
+    inicio_real = time.time()
 
     inicio, fim, soma = subvetor_maximo(vet, 0, n-1)
 
-    print '\n','Tempo de CPU:', time
+    global fim_cpu
 
-    fim1 = timeit.default_timer()
+    fim_cpu = time.clock()
+    fim_real = time.time()
 
-    tempo = fim1-inicio1
+    tempo_real = fim_real - inicio_real
 
-    print 'Tempo Real:', tempo
+    tempo_cpu = fim_cpu - inicio_cpu
+
+    print '\n','Tempo de CPU:', tempo_cpu
+
+    print 'Tempo Real:', tempo_real   
    
     # Imprime a soma do subvetor, a posição do inicio e do fim
     print'Soma maxima:',soma,'\n','inicio: ', inicio,'\n','fim: ', fim

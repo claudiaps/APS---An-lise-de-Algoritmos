@@ -5,7 +5,6 @@
 import sys
 import myBib
 import os.path
-import timeit
 import time
 
 argc = len(sys.argv)
@@ -27,8 +26,8 @@ print '\n',vet
 
 max = -2147483647
 
-inicio1 = timeit.default_timer()
-time = time.clock()
+inicio_cpu = time.clock()
+inicio_real = time.time()
 
 # Encontrando o subvetor máximo
 for i in range(0,n): # Inicio
@@ -39,13 +38,17 @@ for i in range(0,n): # Inicio
             max = soma
             inicio = i
             fim = j
-print '\n','Tempo de CPU:', time
 
-fim1 = timeit.default_timer()
+fim_cpu = time.clock()
+fim_real = time.time()
 
-tempo = fim1-inicio1
+tempo_real = fim_real - inicio_real
 
-print 'Tempo Real:', tempo
+tempo_cpu = fim_cpu - inicio_cpu
+
+print '\n','Tempo de CPU:', tempo_cpu
+
+print 'Tempo Real:', tempo_real
 
 
 # Imprime a soma do subvetor, a posição do inicio e do fim
