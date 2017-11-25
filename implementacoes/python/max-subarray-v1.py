@@ -26,8 +26,8 @@ max = -2147483647
 vet = map(int,vet)
 print '\n',vet
 
-inicio1 = timeit.default_timer()
-time = time.clock()
+inicio_cpu = time.clock()
+inicio_real = time.time()
 
 # Encontrando o subvetor máximo
 for i in range(0,n): # Inicio
@@ -40,13 +40,16 @@ for i in range(0,n): # Inicio
             inicio = i
             fim = j
 
-print '\n','Tempo de CPU:', time
+fim_cpu = time.clock()
+fim_real = time.time()
 
-fim1 = timeit.default_timer()
+tempo_real = fim_real - inicio_real
 
-tempo = fim1-inicio1
+tempo_cpu = fim_cpu - inicio_cpu
 
-print 'Tempo Real:', tempo
+print '\n','Tempo de CPU:', tempo_cpu
+
+print 'Tempo Real:', tempo_real
 
 
 # Imprime a soma do subvetor, a posição do inicio e do fim
