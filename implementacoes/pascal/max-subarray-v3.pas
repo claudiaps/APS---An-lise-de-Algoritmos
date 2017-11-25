@@ -2,24 +2,21 @@
 Versao 3 - Divisao e Conquista}
 
 program max_subarray;
-Uses sysutils;
+Uses sysutils, DateUtils;
 
 type
   sub_max = record
-    inicio : integer;
-    fim    : integer;
-    soma   : integer;
+    inicio : Longint;
+    fim    : Longint;
+    soma   : Longint;
   end;
 var
   subvetor : sub_max;
 
-type
-  pInt = ^integer; {Cria ponteiro p/ inteiro}
-
 {Verifica se o subvetor maximo esta no meio do vetor}
-function max_cross(vet : array of Longint; inicio, meio, fim : integer) : sub_max;
+function max_cross(vet : array of Longint; inicio, meio, fim : Longint) : sub_max;
 var
-  e_soma, d_soma, soma, e_max, d_max, i : integer;
+  e_soma, d_soma, soma, e_max, d_max, i : Longint;
   maxSubVetor : sub_max;
 begin
   soma   := 0;
@@ -55,11 +52,11 @@ begin
       max_cross := maxSubVetor; {Retorna o subvetor}
 end;
 
-function subvetor_maximo(vet : array of Longint; inicio: integer; fim: integer) : sub_max;
+function subvetor_maximo(vet : array of Longint; inicio: Longint; fim: Longint) : sub_max;
 var
   maxSubVetor, e_maxSubVetor, m_maxSubVetor, d_maxSubVetor : sub_max;
   m : real;
-  meio : integer;
+  meio : Longint;
 begin
   if(inicio = fim) then {Caso base}
     begin   {Cria o subvetor de retorno}
@@ -71,10 +68,9 @@ begin
     end
   else
     begin
-        m := (inicio + fim) / 2;
+        m    := (inicio + fim) / 2;
         meio := Trunc(m);
 
-        writeln('Inicio: ', inicio, ' Fim: ', fim, ' Meio: ', meio);
         e_maxSubVetor := subvetor_maximo(vet, inicio, meio); {Testa se o subvetor esta a esquerda}
         d_maxSubVetor := subvetor_maximo(vet, meio+1, fim);  {Testa se o subvetor esta a direta}
         m_maxSubVetor := max_cross(vet, inicio, meio, fim);  {Testa se o subvetor esta no meio}
@@ -90,25 +86,44 @@ end;
 
 
 var
-  n, j: integer;
+  n, j: Longint;
   maxSubVetor : sub_max;
   vet : array of Longint;
+  aux : array of string;
+  fp : TextFile;
+  t1, t2 : TDateTime;
+  crono1, crono2 : cardinal;
+
 begin
-  if paramcount <> 1 then
+  if paramcount <> 2 then
     begin
-      writeln('Uso: ./algoritmo tam_vetor');
+      writeln('Uso: ./algoritmo tam_vetor arquivo');
       exit;
     end;
 
   n := StrToInt(paramstr(1)); {Tamanho do vetor}
   SetLength(vet, n); {Seta o tamanho entre [0..n-1]}
-  Randomize; {P/ nao ficar gerando o mesmo numero sempre}
+  SetLength(aux, n);
 
-  for j := 0 to n-1 do {Inicia o vetor com numeros pseudoaleatorios}
-    vet[j] := Random(200) - 100;
+  assign(fp, paramstr(2)); {Associo o arquivo a variavel fp}
+  reset(fp); {Abro o arquivo somente para leitura}
+  j := 0;
+  for j := 0 to n-1 do
+    readln(fp, aux[j]); {Leio o que esta em fp e armazeno em aux}
+  close(fp); {Fecho o arquivo}
 
   j := 0;
+  for j := 0 to n-1 do {Passar a string p/ o vetor, convertendo}
+    vet[j] := StrToIntDef(aux[j], 0);
+
+  crono1 := GetTickCount64; {Inicia o crono p/ saber o clock}
+  t1     := TimeOf(Now); {Marco a hr atual aqui}
+
   maxSubVetor := subvetor_maximo(vet, 0, n-1); {Encontra o subvetor maximo}
+
+  crono2 := GetTickCount64;
+  t2     := TimeOf(Now); {Marco o que tenho de hr atual aqui}
+  j      := 0;
 
   for j := 0 to n-1 do {Mostra os resultados}
     writeln('Vet[', j, ']: ', vet[j]);
@@ -116,6 +131,8 @@ begin
   writeln('Soma maxima: ', maxSubVetor.soma);
   writeln('Inicio: ', maxSubVetor.inicio);
   writeln('Fim: ', maxSubVetor.fim);
+  writeln('Tempo de CPU: ', FloatToStr((crono2-crono1)/1000));
+  writeln('Tempo real: ', FloatToStr(((MilliSecondsBetween(t1,t2))/1000)));
 
   exit;
 end.

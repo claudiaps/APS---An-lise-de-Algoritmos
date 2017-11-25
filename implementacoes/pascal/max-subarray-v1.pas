@@ -2,27 +2,45 @@
 Versao 1 - Iterativa}
 
 program max_subarray;
-Uses sysutils;
+Uses sysutils, DateUtils;
 
 var
-  n, i, soma, maxSoma, inicio, fim, j, k: integer;
+  n, i, soma, maxSoma, inicio, fim, j, k: Longint;
   vet : array of Longint;
+  aux : array of string;
+  fp : TextFile;
+  t2, t1 : TDateTime;
+  crono1, crono2 : cardinal;
+
 begin
-  if paramcount <> 1 then
+  if paramcount <> 2 then
     begin
-      writeln('Uso: ./algoritmo tam_vetor');
+      writeln('Uso: ./algoritmo tam_vetor arquivo');
       exit;
     end;
 
   n := StrToInt(paramstr(1)); {Tamanho de vetor}
   SetLength(vet, n); {Seta o tamanho entre [0..n-1]}
-  Randomize; {P/ nao ficar gerando o mesmo numero sempre}
+  SetLength(aux, n);
 
-  for i := 0 to n-1 do {Laco que inicia o vetor com numeros pseudoaleatorios}
-    vet[i] := Random(200) - 100;
+  assign(fp, paramstr(2)); {Associo o arquivo a variavel de controle fp}
+  reset(fp); {Abro o arquivo para leitura}
+  i := 0;
+  for i := 0 to n-1 do {Enquanto o arquivo nao estiver no fim}
+    begin
+      readln(fp, aux[i]); {Leio o que esta em fp e armazeno em aux}
+    end;
+  close(fp); {Fecho o arquivo}
 
   i := 0;
+  for i := 0 to n-1 do {for para passar a string do arquivo para o vetor}
+    begin
+      vet[i] := StrToIntDef(aux[i], 0);
+    end;
+
   maxSoma := vet[0];
+  crono1  := GetTickCount64;   {Inicia o crono p/ saber o clock}
+  t1      := TimeOf(Now); {Marco a hora atual aqui}
 
   {Encontrar o subvetor maximo.}
   for i := 0 to n-1 do {Valor inicial}
@@ -39,6 +57,8 @@ begin
             fim     := j;
           end;
       end;
+  crono2 := GetTickCount64;
+  t2     := TimeOf(Now); {Marco o que tenho de hora atual aqui}
 
   i:= 0;
   for i := 0 to n-1 do
@@ -47,6 +67,8 @@ begin
   writeln('Soma maxima: ', maxSoma);
   writeln('Inicio: ', inicio);
   writeln('Fim: ', fim);
+  writeln('Tempo de CPU: ', FloatToStr((crono2-crono1)/1000)); {Faz a diferena do clock ate aqui com o que tinha em crono}
+  writeln('Tempo real: ', FloatToStr(((MilliSecondsBetween(t1,t2))/1000)));  {Diferenca em ms das horas que marquei -> t1 e t2}
 
   exit;
 end.
