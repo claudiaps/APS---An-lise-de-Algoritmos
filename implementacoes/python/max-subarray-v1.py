@@ -4,6 +4,9 @@
 # Autor: João Victor Nascimento
 import sys
 import myBib
+import os.path
+import timeit
+import time
 
 argc = len(sys.argv)
 
@@ -11,17 +14,20 @@ if argc != 2:
     print 'Uso: ./algoritmo tam_vet\n'
     sys.exit(0)
 
-# Tamanho do Vetor
-n = int(sys.argv[1]) 
+teste = sys.argv[1]
 
-vet = []
+vet = open(teste).readlines()
 
-# Preenchendo uma lista com números pseudoaleatórios
-for i in range(0,n):
-    vet.insert(i, (myBib.myRand() % 200) - 100) 
-
+n = len(vet)
 
 max = -2147483647
+
+# Imprime o Vetor Inicial
+vet = map(int,vet)
+print '\n',vet
+
+inicio_cpu = time.clock()
+inicio_real = time.time()
 
 # Encontrando o subvetor máximo
 for i in range(0,n): # Inicio
@@ -34,12 +40,22 @@ for i in range(0,n): # Inicio
             inicio = i
             fim = j
 
-# Imprime o Vetor Inicial
-vet = map(int,vet)
-print '\n',vet
+fim_cpu = time.clock()
+fim_real = time.time()
+
+tempo_real = fim_real - inicio_real
+
+tempo_cpu = fim_cpu - inicio_cpu
+
+print '\n','Tempo de CPU:', tempo_cpu
+
+print 'Tempo Real:', tempo_real
+
 
 # Imprime a soma do subvetor, a posição do inicio e do fim
 print'Soma maxima:',max,'\n','inicio: ', inicio,'\n','fim: ', fim
+
+
 
 
 

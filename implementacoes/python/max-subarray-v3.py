@@ -4,8 +4,9 @@
 # Autor: João Victor Nascimento
 import sys
 import myBib
-
-
+import os.path
+import timeit
+import time
 
 def max_cross(vet, inicio, meio, fim):
     e_soma = -2147483647
@@ -52,23 +53,36 @@ def main():
         print 'Uso: ./algoritmo tam_vet\n'
         sys.exit(0)
 
-    # Tamanho do Vetor
-    n = int(sys.argv[1]) 
+    teste = sys.argv[1]
 
-    vet = []
+    vet = open(teste).readlines()
 
-
-
-    # Preenchendo uma lista com números pseudoaleatórios
-    for i in range(0,n):
-         vet.insert(i, (myBib.myRand() % 200) - 100)
-
-    inicio, fim, soma = subvetor_maximo(vet, 0, n-1)
+    n = len(vet)
 
    # Imprime o Vetor Inicial
     vet = map(int,vet)
     print '\n',vet
+    
+    global inicio_cpu
 
+    inicio_cpu = time.clock()
+    inicio_real = time.time()
+
+    inicio, fim, soma = subvetor_maximo(vet, 0, n-1)
+
+    global fim_cpu
+
+    fim_cpu = time.clock()
+    fim_real = time.time()
+
+    tempo_real = fim_real - inicio_real
+
+    tempo_cpu = fim_cpu - inicio_cpu
+
+    print '\n','Tempo de CPU:', tempo_cpu
+
+    print 'Tempo Real:', tempo_real   
+   
     # Imprime a soma do subvetor, a posição do inicio e do fim
     print'Soma maxima:',soma,'\n','inicio: ', inicio,'\n','fim: ', fim
 
