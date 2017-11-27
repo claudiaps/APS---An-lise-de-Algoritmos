@@ -29,7 +29,7 @@ public class MaxSubarrayV4 {
   
         int array[] = new int[n]; 
         
-        Scanner scan = new Scanner(new File("array_100.txt"));
+        Scanner scan = new Scanner(new File("array_50000.txt"));
             while(scan.hasNextLine()){
                 String line = scan.nextLine();
                         array[i] = Integer.parseInt(line);
