@@ -132,7 +132,7 @@ begin
   writeln('Inicio: ', maxSubVetor.inicio);
   writeln('Fim: ', maxSubVetor.fim);
   writeln('Tempo de CPU: ', FloatToStr((crono2-crono1)/1000));
-  writeln('Tempo real: ', FloatToStr(((MilliSecondsBetween(t1,t2))/1000)));
+  writeln('Tempo real: ', FloatToStr((MilliSecondsBetween(t1,t2))));
 
   exit;
 end.

@@ -68,7 +68,7 @@ begin
   writeln('Inicio: ', inicio);
   writeln('Fim: ', fim);
   writeln('Tempo de CPU: ', FloatToStr((crono2-crono1)/1000)); {Faz a diferena do clock ate aqui com o que tinha em crono}
-  writeln('Tempo real: ', FloatToStr(((MilliSecondsBetween(t1,t2))/1000)));  {Diferenca em ms das horas que marquei -> t1 e t2}
+  writeln('Tempo real: ', FloatToStr((MilliSecondsBetween(t1,t2))));  {Diferenca em ms das horas que marquei -> t1 e t2}
 
   exit;
 end.
